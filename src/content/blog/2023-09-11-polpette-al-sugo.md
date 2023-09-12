@@ -1,9 +1,9 @@
 ---
 title: Polpette al sugo
-description: ""
+description: "Hemlagade italienska köttbullar med tomatsås"
 pubDatetime: 2023-09-11T20:15:23.604Z
 draft: false
-tags: []
+tags: [pasta, italian, spaghetti]
 ---
 
 Traditionellt verkar polpette serveras tillsammans med grönsaker i Italien, medan traditionen att servera med spaghetti verkar härstamma från USA. Oavsett är dessa köttbullar riktigt delikata.
