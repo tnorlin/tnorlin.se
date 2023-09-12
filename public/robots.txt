@@ -3,3 +3,7 @@ Disallow: /nogooglebot/
 
 User-agent: *
 Allow: /
+
+
+Sitemap: https://tnorlin.se/sitemap-index.xml
+
