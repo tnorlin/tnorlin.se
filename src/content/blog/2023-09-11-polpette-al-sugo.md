@@ -23,11 +23,11 @@ Jag använder torkad peperoncino, **Diavoletti Rossi** från [Tutto Calabria](ht
 |--|--:|--|--|
 |Salsiccia|300|g||
 |Kalvfärs|500|g||
-|Pecorino (finriven)|2|dl||
+|Pecorino|2|dl|(finriven)|
 |Oregano|2|tsk/tsp||
 |Ägg|2|st||
-|Muskot|(efter behag)|~|||
-|Vitt bröd (utan kanter)|2|st||
+|Muskot||~|(efter behag)||
+|Vitt bröd|2|st|(utan kanter)|
 |Salt|1|nypa||
 |Peppar|1|nypa||
 
@@ -35,7 +35,7 @@ Jag använder torkad peperoncino, **Diavoletti Rossi** från [Tutto Calabria](ht
 ### Sugo
 |  |Mängd| prefix |  |
 |--|--:|--|--|
-|Olivolja|täck botten||
+|Olivolja|~||täck botten|
 |Vitlök|3|st |(hela klyftor)|
 |Peperoncino|2|st|(torkade)|
 |Rött vin|1-2|dl||
