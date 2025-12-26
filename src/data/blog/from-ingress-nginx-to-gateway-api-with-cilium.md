@@ -3,7 +3,7 @@ title: From ingress-nginx to Gateway API (with Cilium)
 author: Tony Norlin
 description: Migration from ingress-nginx to Gateway API with a shared gateway (with Cilium).
 featured: true
-pubDatetime: 2025-02-23T20:05:15.922Z
+pubDatetime: 2025-12-23T20:05:15.922Z
 draft: false
 tags:
   - kubernetes

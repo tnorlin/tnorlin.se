@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@import "./typography.css";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+:root,
+html[data-theme="light"] {
+  --background: #fdfdfd;
+  --foreground: #282728;
+  --accent: #006cac;
+  --muted: #e6e6e6;
+  --border: #ece9e9;
+  /* Code Block Styles for light theme */
+  --astro-code-color-text: #000000;
+  --astro-code-color-background: #d6d6d6;
+  --astro-code-token-constant: #1c67d1;
+  --astro-code-token-string: #e00000;
+  --astro-code-token-comment: #eb0e0e;
+  --astro-code-token-keyword: #e20808;
+  --astro-code-token-parameter: #e40a0a;
+  --astro-code-token-function: #d06b6b;
+  --astro-code-token-string-expression: #33cc00;
+  --astro-code-token-punctuation: #00cbdd;
+  --astro-code-token-link: #ee00b2;
+}
+
+html[data-theme="dark"] {
+  --background: #2f3741;
+  --foreground: #eaedf3;
+  --accent: #1ad9d9;
+  --muted: #343f60;
+  --border: #1ad9d9;
+  /* Code Block Styles for dark theme */
+  --astro-code-color-text: #eeeeee;
+  --astro-code-color-background: #242424;
+  --astro-code-token-constant: #1c67d1;
+  --astro-code-token-string: #770000;
+  --astro-code-token-comment: #880000;
+  --astro-code-token-keyword: #990000;
+  --astro-code-token-parameter: #aa0000;
+  --astro-code-token-function: #bb0000;
+  --astro-code-token-string-expression: #cc0000;
+  --astro-code-token-punctuation: #dd0000;
+  --astro-code-token-link: #ee0000;
+}
+
+html[data-theme="darks"] {
+  --background: #212737;
+  --foreground: #eaedf3;
+  --accent: #eeeeee;
+  --muted: #343f60;
+  --border: #ab4b08;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-accent/75;
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-muted) transparent;
+  }
+  html {
+    @apply overflow-y-scroll scroll-smooth;
+  }
+  body {
+    @apply flex min-h-svh flex-col bg-background font-mono text-foreground selection:bg-accent/75 selection:text-background;
+  }
+  a,
+  button {
+    @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  section,
+  footer {
+    @apply mx-auto max-w-app px-4;
+  }
+}
+
+@utility max-w-app {
+  @apply max-w-3xl;
+}
+
+.active-nav {
+  @apply underline decoration-wavy decoration-2 underline-offset-4;
+}
+
+/* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 1rem;
+}
