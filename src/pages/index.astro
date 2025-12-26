@@ -42,19 +42,43 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <span class="sr-only">RSS Feed</span>
       </a>
 
-      <p>
-        tnorlin.se is the personal blog of Tony Norlin. Subjects will vary among
-        personal interests and hobbies. Such subjects can include pasta, pizza, coffee, travel, books, photography, family, nature and health. Posts can either be in Swedish or English (or both).
-      </p>
-      {
-        // only display if at least one social link is enabled
-        SOCIALS.length > 0 && (
-          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
-            <Socials />
+          <div class="mt-4 columns-2  gap-x-8 flex">
+            <div class="max-w-50 flex-none">
+          <img
+            src="/assets/kubernaut-eu-logo.png"
+            class=""
+            alt="Tony Norlin"
+          />
           </div>
-        )
-      }
+            <div class="grow">
+          Homelab tinkerer and passionate about italian food culture.<br />
+          My heart ticks for OpenSource.<br />
+          Writes about anything from pizza,
+          pasta, gelato and coffee to illumos, BSD, Kubernetes, Linux,
+          networking and security.
+             </div>
+          </div>
+      <br />
+
+      <p>
+          Prefers my kubernetes vanilla with Cilium as CNI to have a solid
+          foundation, supporting my illumos based Kubernets architecture.
+          Prefers my pizza according to Pizza Napoletana stg. The gelato
+          should be creamy and soft without any notable ice crystals.<br />
+
+          Dtrace and all projects based on eBPF catches my interest
+          (except MS Windows, sorry thats a red line for me).<br />
+          
+      </p>
+      <p>
+          Read the blog posts or connect with me on
+        <LinkButton
+          className="hover:text-skin-accent underline underline-offset-4 decoration-dashed"
+          href="https://www.linkedin.com/in/tonynorlin/"
+        >
+          LinkedIn
+        </LinkButton> .
+      </p>
     </section>
 
     <Hr />

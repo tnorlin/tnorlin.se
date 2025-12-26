@@ -1,37 +1,20 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: "About"
+title: "About tnorlin.se"
 ---
+tnorlin.se is a personal blog about the stuff that have captured the interest of its author, Tony Norlin, throughout the years. The authors interests spans across various technologies and hobbies, it can be anything from italian food culture such as pasta, pizza, gelato and coffee to computer homelab infrastructure and photography. Or anything from the day-to-day life, such as baking a classic sourdough (levain) bread - -  things that stimulate my mental state during spare time.
 
-AstroPaper is a minimal, accessible and SEO-friendly blog theme built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+In this blog there will be a mix of English and Swedish posts.  The postings on this site are my own and do not necessarily represent the postings, strategies or opinions of my employer.
 
-![Astro Paper](public/astropaper-og.jpg)
+This blog will consist of content formerly posted on my technical blog [kubernaut.eu](https://kubernaut.eu/) as there will be less time spending to update the platforms..
+<div>
+  <img src="/assets/logo.svg" class="sm:w-1/1 " alt="captain Kube exploring the greek waters">
+</div>
 
-AstroPaper provides a solid foundation for blogs, or even portfolios\_ with full markdown support, built-in dark mode, and a clean layout that works out-of-the-box.
+The Kubernaut was a blog about technologies that captured the interest of its author Tony Norlin. The author also has an interest in Italian food culture and intends to write about pasta, pizza and coffee at [tnorlin.se](https://tnorlin.se).
 
-The blog posts in this theme also serve as guides, docs or example articles\_ making AstroPaper a flexible starting point for your next content-driven site.
+Captain Kube is a character donated to CNCF - [phippy.io](https://phippy.io).
 
-## Features
-
-AstroPaper comes with a set of useful features that make content publishing easy and effective:
-
-- SEO-friendly
-- Fast performance
-- Light & dark mode
-- Highly customizable
-- Organizable blog posts
-- Responsive & accessible
-- Static search with [PageFind](https://pagefind.app/)
-- Automatic social image generation
-
-and so much more.
-
-## Show your support
-
-If you like [AstroPaper](https://github.com/satnaing/astro-paper), consider giving it a star ⭐️.
-
-Found a bug 🐛 or have an improvement ✨ in mind? Feel free to open an [issue](https://github.com/satnaing/astro-paper/issues), submit a [pull request](https://github.com/satnaing/astro-paper/pulls) or start a [discussion](https://github.com/satnaing/astro-paper/discussions).
-
-If you find this theme helpful, you can also [sponsor me on GitHub](https://github.com/sponsors/satnaing) or [buy me a coffee](https://buymeacoffee.com/satnaing) to show your support — every penny counts.
-
-Kyay zuu! 🙏🏼
+<div>
+  <img src="/assets/about.png" class="sm:w-1/1 " alt="captain Kube exploring the greek waters">
+</div>
