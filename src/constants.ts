@@ -7,6 +7,10 @@ import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconPinterest from "@/assets/icons/IconPinterest.svg";
+import IconThreads from "@/assets/icons/IconThreads.svg";
+import IconDiscord from "@/assets/icons/IconDiscord.svg";
+import IconBluesky from "@/assets/icons/IconBluesky.svg";
+import IconChess from "@/assets/icons/IconChess.svg";
 import { SITE } from "@/config";
 
 interface Social {
@@ -19,19 +23,19 @@ interface Social {
 export const SOCIALS: Social[] = [
   {
     name: "GitHub",
-    href: "https://github.com/satnaing/astro-paper",
+    href: "https://github.com/tnorlin",
     linkTitle: `${SITE.title} on GitHub`,
     icon: IconGitHub,
   },
   {
     name: "X",
-    href: "https://x.com/username",
+    href: "https://x.com/tnorlin",
     linkTitle: `${SITE.title} on X`,
     icon: IconBrandX,
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/username/",
+    href: "https://www.linkedin.com/in/tonynorlin/",
     linkTitle: `${SITE.title} on LinkedIn`,
     icon: IconLinkedin,
   },
