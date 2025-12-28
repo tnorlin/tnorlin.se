@@ -1,4 +1,5 @@
 import type { Props } from "astro";
+import type { GiscusProps } from "@giscus/react";
 import IconMail from "@/assets/icons/IconMail.svg";
 import IconGitHub from "@/assets/icons/IconGitHub.svg";
 import IconBrandX from "@/assets/icons/IconBrandX.svg";
@@ -34,6 +35,12 @@ export const SOCIALS: Social[] = [
     icon: IconBrandX,
   },
   {
+    name: "BlueSky",
+    href: "https://bsky.app/profile/tnorlin.se",
+    linkTitle: `${SITE.title} on Bluesky`,
+    icon: IconBluesky,
+  },
+  {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/tonynorlin/",
     linkTitle: `${SITE.title} on LinkedIn`,
@@ -41,11 +48,43 @@ export const SOCIALS: Social[] = [
   },
   {
     name: "Mail",
-    href: "mailto:yourmail@gmail.com",
+    href: "mailto:tnorlin@pm.me",
     linkTitle: `Send an email to ${SITE.title}`,
     icon: IconMail,
   },
+  {
+    name: "Threads",
+    href: "https://www.threads.com/@norlin_t",
+    linkTitle: `${SITE.title} on Threads`,
+    icon: IconThreads,
+  },
+  {
+    name: "Discord",
+    href: "https://discordapp.com/users/941423574084894730 ",
+    linkTitle: `${SITE.title} on Discord`,
+    icon: IconDiscord,
+  },
+  {
+    name: "Chess",
+    href: "https://www.chess.com/member/jukebox7980",
+    linkTitle: `${SITE.title} on Chess`,
+    icon: IconChess,
+  },
 ] as const;
+
+
+export const GISCUS: GiscusProps = {
+  repo: "tnorlin/tnorlin.se",
+  repoId: "R_kgDOKLycNg",
+  category: "General",
+  categoryId: "DIC_kwDOKLycNs4C0QkR",
+  mapping: "og:title",
+  reactionsEnabled: "1",
+  emitMetadata: "0",
+  inputPosition: "bottom",
+  lang: "en",
+  loading: "lazy",
+};
 
 export const SHARE_LINKS: Social[] = [
   {

@@ -1,7 +1,7 @@
 ---
 import { slugifyStr } from "@/utils/slugify";
 import type { CollectionEntry } from "astro:content";
-import { getPath } from "@/utils/getLifePath";
+import { getLifePath } from "@/utils/getLifePath";
 import Datetime from "./Datetime.astro";
 
 export interface Props extends CollectionEntry<"life"> {
@@ -20,7 +20,7 @@ const headerProps = {
 
 <li class="my-6">
   <a
-    href={getPath(id, filePath)}
+    href={getLifePath(id, filePath)}
     class="inline-block text-lg font-medium text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
   >
     {

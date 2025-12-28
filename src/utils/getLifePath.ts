@@ -8,7 +8,7 @@ import { slugifyStr } from "./slugify";
  * @param includeBase - whether to include `/life` in return value
  * @returns blog post path
  */
-export function getPath(
+export function getLifePath(
   id: string,
   filePath: string | undefined,
   includeBase = true
