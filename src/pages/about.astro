@@ -1,0 +1,79 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Hr from "@/components/Hr.astro";
+import Socials from "@/components/Socials.astro";
+import { SOCIALS } from "@/constants";
+---
+
+<Layout>
+  <Header />
+  <main id="main-content" data-layout="index">
+    <section id="hero" class="pt-8 pb-6">
+      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
+        About
+      </h1>
+
+      <p>
+tnorlin.se is a personal blog about the stuff that have captured the interest of its author, Tony Norlin, throughout the years. The authors interests spans across various technologies and hobbies, it can be anything from italian food culture such as pasta, pizza, gelato and coffee to computer homelab infrastructure and photography.<br />Or anything from the day-to-day life, such as baking a classic sourdough (levain) bread --  things that stimulate my mental state during spare time.
+
+<br />
+In this blog there will be a mix of English and Swedish posts.<br />
+Note:  The postings on this site are my own and do not necessarily represent the postings, strategies or opinions of my employer.<br />
+
+This blog will consist of content formerly posted on my technical blog <a
+        target="_blank"
+        href="https://kubernaut.eu"
+        class="inline-block"
+        aria-label="the Kubernaut"
+        title="Kubernaut - kubernaut.eu"
+      > kubernaut.eu </a>.
+ as there will be less time (and money!) spending with only one site to maintain..
+<div>
+  <img src="/assets/logo.svg" class="sm:w-1/3 " alt="captain Kube exploring the greek waters">
+</div>
+
+The Kubernaut was a blog about technologies that captured the interest of its author Tony Norlin.
+
+Captain Kube is a character donated to CNCF - <a
+        target="_blank"
+        href="https://phippy.io"
+        class="inline-block"
+        aria-label="Captain Kube"
+        title="Captain Kube - phippy.io"
+      > phippy.io </a>.
+
+
+
+<div>
+  <img src="/assets/about.png" class="sm:w-1/1 " alt="captain Kube exploring the greek waters">
+</div>
+          
+      </p>
+      {
+        // only display if at least one social link is enabled
+        SOCIALS.length > 0 && (
+          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
+            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
+            <Socials />
+          </div>
+        )
+      }
+    </section>
+
+    <Hr />
+
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset?.layout;
+    if (indexLayout) {
+      sessionStorage.setItem("backUrl", "/");
+    }
+  });
+</script>
