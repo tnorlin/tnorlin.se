@@ -1,0 +1,7 @@
+{
+  "name": "tnorlin-astro",
+  "compatibility_date": "2025-12-29", // Update to the day you deploy
+  "assets": {
+    "directory": "./dist",
+  }
+}
