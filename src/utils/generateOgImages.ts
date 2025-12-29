@@ -14,16 +14,6 @@ export async function generateOgImageForPost(post: CollectionEntry<"blog">) {
   return svgBufferToPngBuffer(svg);
 }
 
-export async function generateOgImageForRecipe(post: CollectionEntry<"recipe">) {
-  const svg = await postOgImage(post);
-  return svgBufferToPngBuffer(svg);
-}
-
-export async function generateOgImageForLife(post: CollectionEntry<"life">) {
-  const svg = await postOgImage(post);
-  return svgBufferToPngBuffer(svg);
-}
-
 export async function generateOgImageForSite() {
   const svg = await siteOgImage();
   return svgBufferToPngBuffer(svg);

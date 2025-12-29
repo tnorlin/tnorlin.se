@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import getSortedPosts from "./getSortedPosts";
+import getSortedPosts from "./getSortedTags";
 
 import { slugifyAll } from "./slugify";
 
