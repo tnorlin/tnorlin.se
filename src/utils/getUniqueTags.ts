@@ -20,4 +20,5 @@ const getUniqueTags = (posts: CollectionEntry<"blog">[]) => {
   return tags;
 };
 
+
 export default getUniqueTags;
