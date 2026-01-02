@@ -1,9 +1,7 @@
-import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import rss from "@astrojs/rss";
+import { getCollection } from "astro:content";
 import getSortedPosts from "@/utils/getSortedAny";
 import { SITE } from "@/config";
-
-
 
 export async function GET() {
   const blog = await getCollection("blog");
@@ -14,13 +12,13 @@ export async function GET() {
   );
 
   return rss({
-    stylesheet: '/rss/styles.xsl',
-    title: 'tnorlin.se - all posts feed',
+    stylesheet: "/rss/styles.xsl",
+    title: "tnorlin.se - all posts feed",
     description: SITE.desc,
     site: SITE.website,
     customData: `<atom:link href="${SITE.website}/rss.xml" rel="self" type="application/rss+xml" xmlns:atom="http://www.w3.org/2005/Atom"/>`,
     trailingSlash: false,
-    items: sortedBlogPosts.map((post) => ({
+    items: sortedBlogPosts.map(post => ({
       title: post.data.title,
       pubDate: new Date(post.data.modDatetime ?? post.data.pubDatetime),
       description: post.data.description,

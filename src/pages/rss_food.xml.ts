@@ -1,5 +1,5 @@
-import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import rss from "@astrojs/rss";
+import { getCollection } from "astro:content";
 import { SITE } from "@/config";
 import getSortedPosts from "@/utils/getSortedAny";
 
@@ -14,12 +14,12 @@ export async function GET() {
       new Date(a.data.pubDatetime).getTime()
   );
   return rss({
-    stylesheet: '/rss/styles.xsl',
+    stylesheet: "/rss/styles.xsl",
     description: SITE.desc,
     site: SITE.website,
-    title: 'tnorlin.se - Food related feed',
+    title: "tnorlin.se - Food related feed",
     trailingSlash: false,
-    items: sortedBlogPosts.map((post) => ({
+    items: sortedBlogPosts.map(post => ({
       link: `/posts/${post.id}/`,
       // Note: this will not process components or JSX expressions in MDX files.
       title: post.data.title,
