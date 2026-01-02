@@ -7,7 +7,7 @@ const postFilter = ({ data }: CollectionEntry<"blog">) => {
     new Date(data.pubDatetime).getTime() - SITE.scheduledPostMargin;
   return (
     !data.draft &&
-    data.category == "food" &&
+    data.category == "life" &&
     (import.meta.env.DEV || isPublishTimePassed)
   );
 };

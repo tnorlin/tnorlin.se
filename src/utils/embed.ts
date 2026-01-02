@@ -47,7 +47,11 @@ export function extractYoutubeVideoId(rawUrl: string): string | null {
       const segments = url.pathname.split("/").filter(Boolean);
       if (!segments.length) return null;
 
-      if (segments[0] === "embed" || segments[0] === "shorts" || segments[0] === "live") {
+      if (
+        segments[0] === "embed" ||
+        segments[0] === "shorts" ||
+        segments[0] === "live"
+      ) {
         return sanitizeVideoId(segments[1] ?? null);
       }
 

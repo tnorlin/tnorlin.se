@@ -17,8 +17,7 @@ About two weeks ago I finally received a Turing RK1 module (Rockchip RK3588) tha
 
 Not that there's something wrong with bhyve, not at all! Especially not considered the nvme backend performing rather well, as seen here - a quick sample from the first reasonable web search hit I found, so take this for what it is (https://medium.com/@krisiasty/nvme-storage-verification-and-benchmarking-49b026786297), but this is on a virtual guest with 4G memory and 4 virtual cores. Way better than my experience on the virtio backend:
 
-
-    cat << EOF > nvme-seq-read.fio 
+    cat << EOF > nvme-seq-read.fio
     [global]
     name=nvme-seq-read
     time_based
@@ -34,7 +33,7 @@ Not that there's something wrong with bhyve, not at all! Especially not consider
     [nvme0]
     filename=/dev/nvme0n1
     EOF
-    
+
     fio nvme-seq-read.fio
     nvme0: (g=0): rw=read, bs=(R) 256KiB-256KiB, (W) 256KiB-256KiB, (T) 256KiB-256KiB, ioengine=libaio, iodepth=32
     fio-3.28
@@ -61,16 +60,14 @@ Not that there's something wrong with bhyve, not at all! Especially not consider
          complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.1%, 64=0.0%, >=64=0.0%
          issued rwts: total=90489,0,0,0 short=0,0,0,0 dropped=0,0,0,0
          latency   : target=0, window=0, percentile=100.00%, depth=32
-    
+
     Run status group 0 (all jobs):
        READ: bw=754MiB/s (791MB/s), 754MiB/s-754MiB/s (791MB/s-791MB/s), io=22.1GiB (23.7GB), run=30006-30006msec
-    
+
     Disk stats (read/write):
       nvme0n1: ios=101251/713, merge=0/304, ticks=295519/1964, in_queue=297518, util=99.78%
 
-
 And this one:
-
 
     cat << EOF > nvme-rand-read.fio
     [global]
@@ -92,7 +89,7 @@ And this one:
     EOF
     fio
     EOF
-    
+
     fio nvme-rand-read.fio
     nvme0: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=16
     ...
@@ -122,20 +119,18 @@ And this one:
          complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.1%, 32=0.0%, 64=0.0%, >=64=0.0%
          issued rwts: total=2628389,0,0,0 short=0,0,0,0 dropped=0,0,0,0
          latency   : target=0, window=0, percentile=100.00%, depth=16
-    
+
     Run status group 0 (all jobs):
        READ: bw=342MiB/s (359MB/s), 342MiB/s-342MiB/s (359MB/s-359MB/s), io=10.0GiB (10.8GB), run=30021-30021msec
-    
+
     Disk stats (read/write):
       nvme0n1: ios=3062520/15, merge=0/3, ticks=169941/3, in_queue=169944, util=99.61%
-
 
 But bare metal on a couple of RK1 is still interesting for me, just the potential of having the Turing PI (through an API) boot/halt the tiny nodes on request, through some custom node autoscaler.. energy/noise/heat would really be in my favour. Well, that is one goal.
 
 Another goal of mine is to explore Talos, Pulumi, Dagger and some other projects a bit further. Time is a constraint I guess we all have to deal with.
 
 As I mentioned initially, I’ve been looking into the upcoming v1.16 release of Cilium and one (of the many) goodies is the ability to announce ClusterIP CIDR to the network. This should probably excite a couple of you as much as it excites me! This means that the worker nodes can register themselves dynamically without any special route trickery. I haven’t went into depth with this yet, but here’s a teaser:
-
 
     vtysh -c 'show ip route' |grep '10.22.14'
     K>* 0.0.0.0/0 [0/0] via 10.22.14.62, enp0s6f1, 00:58:52
@@ -165,11 +160,9 @@ As I mentioned initially, I’ve been looking into the upcoming v1.16 release of
       *                         via 10.22.14.12, enp0s6f1, weight 1, 00:54:18
       *                         via 10.22.14.15, enp0s6f1, weight 1, 00:54:18
 
-
 Another goal of mine is that I’m consolidating my two ZFS arrays with 40k+ Power_On_Hours into a new ZFS array with two attached mirrors. Fourteen disks will become four when I’m done with this. I have bought two disks from two vendors with a couple of months between the purchases, the disks have been powered on for varying amount of hours and so on (as I usually do with my disk purchases, actually two of the disks in my zones array are bough on Ebay just for the sake of having a different history).
 
 Hopefully the risk of simultaneous failure will be mitigated, but this isn’t anything I want to rush. In the old array much of the data is redundant and fragmented as I, in the early days, took a backup of whole (sometimes failing) disks as images as I felt uncertain if the data was consistent. There are also ancient stuff as my old LXC environments that I will most certainly never again need (hoarding habits) with things like Debian sarge or earlier Fedora. rsync copies from mobiles and computers (not just home directories). Photos that were saved onto the first available USB-disk. A data nightmare that was created several years ago is in progress of being taken care of.
-
 
             NAME                       STATE     READ WRITE CKSUM
             zones                      ONLINE       0     0     0
@@ -185,7 +178,7 @@ Hopefully the risk of simultaneous failure will be mitigated, but this isn’t a
               mirror-4                 ONLINE       0     0     0
                 c0t50014EE25F0AC6DFd0  ONLINE       0     0     0
                 c0t50014EE209BD7762d0  ONLINE       0     0     0
-    
+
             NAME                       STATE     READ WRITE CKSUM
             domniosce                  ONLINE       0     0     0
               raidz2-0                 ONLINE       0     0     0
@@ -195,7 +188,7 @@ Hopefully the risk of simultaneous failure will be mitigated, but this isn’t a
                 c0t50014EE00376F6D6d0  ONLINE       0     0     0
                 c0t50014EE605959C0Dd0  ONLINE       0     0     0
                 c0t50014EE003772D83d0  ONLINE       0     0     0
-    
+
     for i in $(ls /dev/rdsk/c0t500*d0); do smartctl -a ${i} |grep Power_On; done
       9 Power_On_Hours          0x0032   041   041   000    Old_age   Always       -       52068 (173 109 0)
       9 Power_On_Hours          0x0032   046   046   000    Old_age   Always       -       47657 (250 35 0)
@@ -212,12 +205,9 @@ Hopefully the risk of simultaneous failure will be mitigated, but this isn’t a
       9 Power_On_Hours          0x0032   001   001   000    Old_age   Always       -       75732
       9 Power_On_Hours          0x0032   001   001   000    Old_age   Always       -       73562
 
-
-
 But over to the news of the day — Uwubernetes was released yesterday!
 
 I’m happy to announce that I’ve successfully ported over the current release (v1.30) of Kubernetes to illumos and OpenBSD (and also, compiled the binaries for FreeBSD).
-
 
     _output/bin/kubectl version -o yaml
     clientVersion:
@@ -231,7 +221,6 @@ I’m happy to announce that I’ve successfully ported over the current release
       minor: 30+
       platform: illumos/amd64
     kustomizeVersion: v5.0.4-0.20230601165947-6ce0bf390ce3
-
 
 Fetch the source/binaries at my GH repo https://github.com/tnorlin/kubernetes/releases
 
