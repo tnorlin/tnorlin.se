@@ -11,7 +11,10 @@ import getSortedPosts from "@/utils/getSortedLifes";
 import { SITE } from "@/config";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const posts = await getCollection("blog", ({ data }) => (!data.draft && data.category == "life"));
+  const posts = await getCollection(
+    "blog",
+    ({ data }) => !data.draft && data.category == "life"
+  );
   return paginate(getSortedPosts(posts), { pageSize: SITE.postPerPage });
 }) satisfies GetStaticPaths;
 

@@ -7,7 +7,11 @@ import { SITE } from "@/config";
 export async function GET() {
   const blog = await getCollection("blog");
 
-  const sortedBlogPosts = getSortedPosts(blog).sort((a, b) => new Date(b.data.pubDatetime).getTime() - new Date(a.data.pubDatetime).getTime());
+  const sortedBlogPosts = getSortedPosts(blog).sort(
+    (a, b) =>
+      new Date(b.data.pubDatetime).getTime() -
+      new Date(a.data.pubDatetime).getTime()
+  );
   return rss({
     title: SITE.title,
     description: SITE.desc,

@@ -6,6 +6,7 @@ draft: false
 category: food
 tags: [italian, fastfood]
 ---
+
 Recept baserat från Bar Ilde via Italia Squisita (https://www.youtube.com/watch?v=8BZZJjewoos)
 
 Jag har testat att göra det på le 5 Stagioni - la Napoletana och Molino Caputo pizzeria med gott resultat.
@@ -14,15 +15,13 @@ Jag har testat att göra det på le 5 Stagioni - la Napoletana och Molino Caputo
 
 Räcker till 5-6 piadinas:
 
-
-|  |Mängd| prefix |  |
-|--|--:|--|--|
-|Mjöl|500g|Flour
-|Vatten|910|g|Water|
-|Ister|46|g|Lard|
-|Bikarbonat|0.40|g|Baking soda|
-|Salt| 10|g|Salt|
-
+|            | Mängd | prefix |             |
+| ---------- | ----: | ------ | ----------- |
+| Mjöl       |  500g | Flour  |
+| Vatten     |   910 | g      | Water       |
+| Ister      |    46 | g      | Lard        |
+| Bikarbonat |  0.40 | g      | Baking soda |
+| Salt       |    10 | g      | Salt        |
 
 Ställ fram ister i rumstemperatur en stund före så att den mjuknar.
 Värm upp vattnet på spis/i vattenkokare så att det blir ljummet och ej(!) så att det bränns.
@@ -33,7 +32,7 @@ När allt vatten blandats med mjölet så ska degen knådas smidig och elastiskt
 Vila degen i 20-30 minuter i en bunke under plastfolie (degen får inte torka ut).
 Efter vila, ta ut degen och forma till en limpa. Dela i 5-6 lika stora bitar.
 Forma bitarna till bollar, liknande det man formar mozzarella. Dvs, genom att nypa ihop i botten och sen rulla (för att inte få skarvar).
-Låt bollarna vila i 20-30 minuter. 
+Låt bollarna vila i 20-30 minuter.
 Värm under tiden upp ett stekbord / häll så att det hinner bli varmt. Med fördel i två temperaturzoner, om möjligt, för att ha bättre kontroll. Jag har har ett stekbord motsvarande detta https://www.grillkung.se/produkt/b-of-sweden-stekbord-oppet-38x38cm-kolstal som jag har på en glaskeramik häll som vilar över två plattor. Ena plattan ställt i relativt hög temperatur och andra plattan något lägre.
 
 När bollarna vilat klart är det dags att kavla ut bollarna till 2-3 mm tjocka diskar, men ta en åt gången (för att undvika att det hinner bildas en skorpa).

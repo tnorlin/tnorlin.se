@@ -72,7 +72,6 @@ export const SOCIALS: Social[] = [
   },
 ] as const;
 
-
 export const GISCUS: GiscusProps = {
   repo: "tnorlin/tnorlin.se",
   repoId: "R_kgDOKLycNg",
