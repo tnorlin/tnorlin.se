@@ -1,15 +1,17 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
-import sanitizeHtml from 'sanitize-html';
-import MarkdownIt from 'markdown-it';
 import { SITE } from "@/config";
-import IconRss from "@/assets/icons/IconRss.svg";
-const parser = new MarkdownIt();
+import getSortedPosts from "@/utils/getSortedAny";
 
-export async function GET(context) {
+export async function GET() {
   const blog = await getCollection(
     "blog",
     ({ data }) => !data.draft && data.category == "life"
+  );
+  const sortedBlogPosts = getSortedPosts(blog).sort(
+    (a, b) =>
+      new Date(b.data.pubDatetime).getTime() -
+      new Date(a.data.pubDatetime).getTime()
   );
   return rss({
     stylesheet: '/rss/styles.xsl',
@@ -17,13 +19,12 @@ export async function GET(context) {
     description: SITE.desc,
     site: SITE.website,
     trailingSlash: false,
-    items: blog.map((post) => ({
+    items: sortedBlogPosts.map((post) => ({
       link: `/posts/${post.id}/`,
       // Note: this will not process components or JSX expressions in MDX files.
-      content: sanitizeHtml(parser.render(post.body), {
-        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
-      }),
-      ...post.data,
+      title: post.data.title,
+      pubDate: new Date(post.data.modDatetime ?? post.data.pubDatetime),
+      description: post.data.description,
     })),
   });
 }
