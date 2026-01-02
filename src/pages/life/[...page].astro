@@ -8,6 +8,7 @@ import Footer from "@/components/Footer.astro";
 import Card from "@/components/Card.astro";
 import Pagination from "@/components/Pagination.astro";
 import getSortedPosts from "@/utils/getSortedLifes";
+import IconRss from "@/assets/icons/IconRss.svg";
 import { SITE } from "@/config";
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -24,6 +25,20 @@ const { page } = Astro.props;
 <Layout title={`Posts | ${SITE.title}`}>
   <Header />
   <Main pageTitle="Posts" pageDesc="Impressions from the day-to-day life.">
+     RSS Feed: <a
+        target="_blank"
+        href="/rss_life.xml"
+        class="inline-block"
+        aria-label="rss feed"
+        title="RSS Feed"
+      >
+        <IconRss
+          width={20}
+          height={20}
+          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
+        />
+        <span class="sr-only">RSS Feed</span>
+      </a>
     <ul>
       {page.data.map(data => <Card {...data} />)}
     </ul>
