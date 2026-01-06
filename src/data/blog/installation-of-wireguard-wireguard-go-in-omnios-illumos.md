@@ -1,7 +1,7 @@
 ---
 title: Installation of wireguard (wireguard-go) in OmniOS (illumos)
 author: Tony Norlin
-featured: true
+featured: false
 description: "A short note on installing wireguard onto a non-global zone in illumos."
 category: tech
 pubDatetime: 2023-09-03T14:13:51.279Z
