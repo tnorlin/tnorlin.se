@@ -8,12 +8,8 @@ draft: false
 tags: [Cilium, Hubble, Kubernetes, Grafana, Prometheus, homelab]
 ---
 
-
-
----
 Most of the Cilium users have probably tried the Hubble UI and appreciated the visuals, together with table of flows:
 ![Example of denied (dropped) traffic in Hubble UI.](/assets/hubble-ui-denied.png)_Example of denied (dropped) traffic in Hubble UI._
-
 
 As good as the Hubble UI is for overview and painting relations between endpoints, the `hubble` cli command is often a better choice for troubleshooting and auditing, as it allows for filtering and storing the output of flows. A similar example below:
 
@@ -28,6 +24,7 @@ Jan  5 22:38:04.995: suspicious/escape:33160 (ID:7187) <> disney.com:80 (ID:1677
 Jan  5 22:38:04.996: suspicious/escape:33160 (ID:7187) <> disney.com:80 (ID:16777218) Policy denied DROPPED (TCP Flags: SYN)
 Jan  5 22:38:05.499: suspicious/escape:33160 (ID:7187) <> disney.com:80 (ID:16777218) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
 ```
+
 Some of you collects the prometheus metrics and make valuable conclusions and paint dashboards in Grafana with the information. But did you know that you can also export the Hubble Flowlogs to be consumed later?
 
 ### Hubble Flow Exporter to the rescue
