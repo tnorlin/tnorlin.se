@@ -1,5 +1,5 @@
 ---
-title: Day #15 of rediscovering FreeBSD
+title: "Day #15 of rediscovering FreeBSD"
 description: "I've decided to rediscover FreeBSD as FreeBSD 15.0 was recently released."
 pubDatetime: 2026-03-01T18:11:46.030Z
 category: tech
