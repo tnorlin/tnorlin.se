@@ -4,6 +4,7 @@ description: "I've decided to rediscover FreeBSD as FreeBSD 15.0 was recently re
 pubDatetime: 2026-03-01T18:11:46.030Z
 category: tech
 draft: false
+featured: true
 tags: [FreeBSD, illumos, homelab]
 ---
 ![Photo by Samuel  Sianipar - https://unsplash.com/@samthewam24](/assets/plumbing.jpg)Plumbing - Photo by Samuel Sianipar - https://unsplash.com/@samthewam24.
