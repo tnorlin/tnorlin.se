@@ -7,6 +7,7 @@ draft: false
 featured: true
 tags: [FreeBSD, illumos, homelab]
 ---
+
 ![Photo by Samuel  Sianipar - https://unsplash.com/@samthewam24](/assets/plumbing.jpg)Plumbing - Photo by Samuel Sianipar - https://unsplash.com/@samthewam24.
 
 ---
@@ -30,7 +31,8 @@ First I thought I misunderstood the syntax and reconfigured, then I blamed my LA
 
 ## Pass through devices
 
-In illumos, pass through devices is (mostly) found with running the ```prtconf``` command and looking for output like:
+In illumos, pass through devices is (mostly) found with running the `prtconf` command and looking for output like:
+
 ```
 i86pc (driver name: rootnex)
     scsi_vhci, instance #0 (driver name: scsi_vhci)
@@ -53,17 +55,21 @@ i86pc (driver name: rootnex)
 ```
 
 Physical devices that the kernel should consider for PPT in /etc/matches:
+
 ```
     pciex8086,10fb
     pciex8086,1521
 ```
 
-and the actual devices in /etc/alias (here it can also be something like ```/pci@0,0/pci15d9,921@14/device@1``` to select the first port of a device):
+and the actual devices in /etc/alias (here it can also be something like `/pci@0,0/pci15d9,921@14/device@1` to select the first port of a device):
+
 ```
     ppt "pciex8086,10fb"
     ppt "pciex8086,1521"
 ```
-With FreeBSD, it felt a bit easier with ```pciconf -vl``` and then select the devices based on the numbers in the selector column:
+
+With FreeBSD, it felt a bit easier with `pciconf -vl` and then select the devices based on the numbers in the selector column:
+
 ```
 ppt4@pci0:183:0:0: class=0x020000 rev=0x04 hdr=0x00 vendor=0x8086 device=0x37d2 subvendor=0x15d9 subdevice=0x37d2
     vendor     = 'Intel Corporation'
@@ -82,7 +88,8 @@ ixl0@pci0:183:0:2: class=0x020000 rev=0x04 hdr=0x00 vendor=0x8086 device=0x37d0 
     subclass   = ethernet
 ```
 
-add it in the ```/boot/loader.conf``` as pptdevs:
+add it in the `/boot/loader.conf` as pptdevs:
+
 ```
     pptdevs="102/0/0 102/0/1 102/0/2 102/0/3 183/0/0 183/0/1"
 ```
@@ -96,6 +103,7 @@ At home, link aggregation can be uneccessary complication, but it can also benef
 I think that I cannot enough show my appreciation for what Sunay Tripathi et. al. created with the [crossbow project](https://www.usenix.org/legacy/event/lisa09/tech/full_papers/tripathi.pdf) for solaris. It's truly amazing that over 15 years later, the implementation still feels like it's at least a couple of years ahead of any (that I'm aware of) other implementation.
 
 Just have a look at the data link administration command [dladm(8)](https://man.omnios.org/man8/dladm):
+
 ```
 Combine a set of links into a single IEEE 802.3ad link aggregation named aggr-link. The use of an integer key to generate a link name for the aggregation is also supported for backward compatibility. Many of the -aggr subcommands below also support the use of a key to refer to a given aggregation, but use of the aggregation link name is preferred. See the NOTES section for more information on keys.
 
@@ -133,39 +141,42 @@ Specifies a fixed unicast hardware address to be used for the aggregation. If th
 ```
 
 The same command sets up (persistently), shows and modifies link aggregations (or other data links, such as physical, ethernet, vlan, wifi and IP tunnels). Sample from one of my other machines:
+
 ```
     $ dladm show-aggr aggr0 -L
     LINK        PORT         AGGREGATABLE SYNC COLL DIST DEFAULTED EXPIRED
     aggr0       ixgbe0       yes          yes  yes  yes  no        no
     --          ixgbe1       yes          yes  yes  yes  no        no
-    
+
     $ dladm show-aggr aggr0 -P
     LINK            POLICY   ADDRPOLICY           LACPACTIVITY  LACPTIMER   FLAGS
     aggr0           L4       auto                 active        short       -----
-    
-    $ dladm show-aggr aggr0 -x 
+
+    $ dladm show-aggr aggr0 -x
     LINK        PORT           SPEED    DUPLEX   STATE    ADDRESS            PORTSTATE
     aggr0       --             1000Mb   full     up       ac:1f:6b:a5:f8:42  --
                 ixgbe0         1000Mb   full     up       ac:1f:6b:a5:f8:42  attached
                 ixgbe1         1000Mb   full     up       ac:1f:6b:a5:f8:43  attached
-    
-    $ dladm show-aggr aggr0 -s 
+
+    $ dladm show-aggr aggr0 -s
     LINK        PORT      IPACKETS RBYTES OPACKETS OBYTES IPKTDIST OPKTDIST
     aggr0       --        17983090538 1644928576672 20064895095 1799107450385 -- --
-    --          ixgbe0    8468569944 820140880664 11111809306 904897084336 47.1   55.4  
-    --          ixgbe1    9514520594 824787696008 8953085789 894210366049 52.9   44.6  
+    --          ixgbe0    8468569944 820140880664 11111809306 904897084336 47.1   55.4
+    --          ixgbe1    9514520594 824787696008 8953085789 894210366049 52.9   44.6
 ```
 
-Back to FreeBSD and setup. The structure is described in https://docs.freebsd.org/en/books/handbook/advanced-networking/#network-aggregation and I set it in ```/etc/rc.conf``` as:
+Back to FreeBSD and setup. The structure is described in https://docs.freebsd.org/en/books/handbook/advanced-networking/#network-aggregation and I set it in `/etc/rc.conf` as:
+
 ```
     cloned_interfaces="lagg0"
     ifconfig_ixl0="-vlanhwfilter up"
     ifconfig_ixl1="-vlanhwfilter up"
     ifconfig_lagg0="laggproto lacp laggport ixl0 laggport ixl1 up"
     ifconfig_lagg0_description="LAG201"
-````
+```
 
 and it shows up as:
+
 ```
     $ ifconfig lagg0
     lagg0: flags=1008943<UP,BROADCAST,RUNNING,PROMISC,SIMPLEX,MULTICAST,LOWER_UP> metric 0 mtu 1500
@@ -183,7 +194,7 @@ and it shows up as:
 
 ## Bridge layer
 
-In illumos, I don't set up bridge interfaces as I find them as something adding up to the datapath in a way that is of no use for me. Instead I create a ```vnic``` that is a virtual interface, and connect it directly to the aggregation link layer.
+In illumos, I don't set up bridge interfaces as I find them as something adding up to the datapath in a way that is of no use for me. Instead I create a `vnic` that is a virtual interface, and connect it directly to the aggregation link layer.
 
 ```
 vnic-link   A virtual network interface created on a link, an
@@ -193,20 +204,22 @@ vnic-link   A virtual network interface created on a link, an
 ```
 
 Example from another OmniOS machine, I have a zone with a vnic interface exposed as a TFTP PXE service on a dedicated VLAN:
+
 ```
     $ dladm show-vnic pxebooter0
     LINK         OVER       SPEED    MACADDRESS        MACADDRTYPE VID  ZONE
     pxebooter0   aggr0      1000     2:8:20:f4:7d:62   fixed       69   pxebooter
-    
+
     $ dladm show-vnic -s pxebooter0
-            ipackets  rbytes      opackets  obytes          
-    Total   16321811  7879573143  14054330  43176235359 
+            ipackets  rbytes      opackets  obytes
+    Total   16321811  7879573143  14054330  43176235359
     pxebooter0      16321811  7879573143  14054330  43176235359     100.0   100.0
 ```
 
-The link is called ```pxebooter0``` and tagged with VLAN 69, with a fixed MAC address in a zone called ```pxebooter``` in the global zone's (host) LAGG called ```aggr0```. And the next command, with statistics.
+The link is called `pxebooter0` and tagged with VLAN 69, with a fixed MAC address in a zone called `pxebooter` in the global zone's (host) LAGG called `aggr0`. And the next command, with statistics.
 
-Back to FreeBSD, a bridge is configured as (in ```/etc/rc.conf```):
+Back to FreeBSD, a bridge is configured as (in `/etc/rc.conf`):
+
 ```
     cloned_interfaces="lagg0 bridge0"
     [.. truncated output here ]
@@ -216,23 +229,26 @@ Back to FreeBSD, a bridge is configured as (in ```/etc/rc.conf```):
 ## VLAN (and IP) Layer
 
 In illumos, I configure the global zone persistently with a vnic, as:
+
 ```
-    $ dladm create-aggr -l <link> -v <vlanid> 
+    $ dladm create-aggr -l <link> -v <vlanid>
 ```
 
-Then if desired, additional linkprops can be set as ```-m``` form a desired mac address, ```-p``` and link properties (such as allowed-ip to only allow a specific CIDR, cpus for CPU pinning.. various options spoof protection, promiscous mode).
+Then if desired, additional linkprops can be set as `-m` form a desired mac address, `-p` and link properties (such as allowed-ip to only allow a specific CIDR, cpus for CPU pinning.. various options spoof protection, promiscous mode).
 
 In crossbow, there's certainly a way to create a dedicated vlan interface, and then connect an etherstub (a virtual switch) - but I found that as over complicated. But I do use isolated etherstubs for zone networking that should remain within the global zone (host).
 
 Then the addressing of an IP the interfaces happens through the [ipadm(8)](https://man.omnios.org/man8/ipadm) command and consists of two steps  - creation of the IP interface and then addressing it.
 
 While the link it initiated and handled in the global zone, the IP interface is created in the local zone. Looking at IP interface from the global zone:
+
 ```
     $ ipadm show-if pxebooter0
 ipadm: Could not get interface(s): Interface does not exist
 ```
 
 Within the local zone, on the other hand:
+
 ```
     $ ipadm show-if pxebooter0
     IFNAME     CLASS     STATE    CURRENT      PERSISTENT
@@ -240,6 +256,7 @@ Within the local zone, on the other hand:
 ```
 
 Then, looking at the address, you can see (v4 could be anything, but just an illustration that it is IPv4) the IP address, that the address type is static (but it could be a DHCP and handled automatically by the interface):
+
 ```
     $ ipadm show-addr -o all pxebooter0/v4
     ADDROBJ           TYPE     STATE        CURRENT PERSISTENT ADDR
@@ -250,11 +267,13 @@ With FreeBSD on the other hand, I've not find what's the best way. During my spa
 Instead, I looked at the [vlan(4)](https://man.freebsd.org/cgi/man.cgi?vlan) to be my setup. At a glance, the device looks similar to the vlan interface in illumos, and as such possibly not the best device to use (but I could not find the corresponding device to use as a vnic).
 
 Added to the config, it becomes:
+
 ```
     cloned_interfaces="bridge0 lagg0 vlan162"
     [.. truncated output here ]
     ifconfig_vlan162="inet 10.12.13.14/26"
 ```
+
 ```
     $ ifconfig vlan162
     vlan163: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> metric 0 mtu 1496
@@ -269,6 +288,7 @@ Added to the config, it becomes:
 Looking at the mtu above, 1496, so there's something lost in the way
 
 Compared to the vnic I showed earlier:
+
 ```
     $ dladm show-link pxebooter0
     LINK        CLASS     MTU    STATE    BRIDGE     OVER
@@ -276,6 +296,7 @@ Compared to the vnic I showed earlier:
 ```
 
 And looking at the IP interface layer of the vnic, it would also be with a MTU of 1500:
+
 ```
     $ ipadm show-ifprop pxebooter0
     IFNAME      PROPERTY        PROTO PERM CURRENT    PERSISTENT DEFAULT    POSSIBLE
@@ -294,7 +315,8 @@ And looking at the IP interface layer of the vnic, it would also be with a MTU o
     pxebooter0  standby         ip    rw   off        --         off        on,off
 ```
 
-So there's optimisations I'm not (yet) aware of in FreeBSD, but the relevant part from the ```/etc/rc.conf```: 
+So there's optimisations I'm not (yet) aware of in FreeBSD, but the relevant part from the `/etc/rc.conf`: 
+
 ```
     $ cat /etc/rc.conf
     hostname="hypar"
@@ -314,6 +336,7 @@ So there's optimisations I'm not (yet) aware of in FreeBSD, but the relevant par
 I've looked at [Bastille](https://bastille.readthedocs.io/en/latest/), and while I'm convinced the folks over there are highly skilled, I'm keeping it simple and create vanilla VNET jails (with shell scripts). I saw host optimisations there that I immediately applied in my setup.
 
 In my setup, I follow the vnet guide and create a template (and a snapshot) of 15.0:
+
 ```
     $ zfs list -t snapshot -r zroot/jails/templates/15.0-RELEASE
     NAME                                      USED  AVAIL  REFER  MOUNTPOINT
@@ -321,37 +344,38 @@ In my setup, I follow the vnet guide and create a template (and a snapshot) of 1
 ```
 
 Then, for a jail (in vlan 163):
+
 ```
     zfs clone zroot/jails/templates/15.0-RELEASE@base zroot/jails/containers/${i}
-    
+
     cat << EOF > /etc/jail.conf.d/${i}.conf
     ${i} {
-      # STARTUP/LOGGING 
-      exec.start = "/bin/sh /etc/rc"; 
+      # STARTUP/LOGGING
+      exec.start = "/bin/sh /etc/rc";
       exec.stop  = "/bin/sh /etc/rc.shutdown";
       exec.consolelog = "/var/log/jail_console_\${name}.log";
-    
+
       # PERMISSIONS
       allow.raw_sockets;
       exec.clean;
       mount.devfs;
       devfs_ruleset = 5;
-    
+
       # PATH/HOSTNAME
       path = "/jails/containers/\${name}";
       host.hostname = "\${name}";
-    
+
       # VNET/VIMAGE
       vnet;
       vnet.interface = "\${epair}b";
-    
+
       # NETWORKS/INTERFACES
       \$id = "${nodes[${i}]##*.}";
       \$ip = "10.163.0.\${id}/24";
       \$gateway = "10.163.0.1";
       \$bridge = "${bridge}";
       \$epair = "epair\${id}";
-    
+
       # ADD TO bridge INTERFACE
       exec.prestart += "ifconfig \${epair} create -vlanhwfilter up";
       exec.prestart += "ifconfig \${bridge} vlanfilter addm \${epair}a untagged 163 up";
@@ -364,6 +388,7 @@ Then, for a jail (in vlan 163):
 ```
 
 The epair (contrary to the vlan interface I used in the host) uses a normal mtu:
+
 ```
     # jexec -u root jail ifconfig epair40b
     epair40b: flags=1008843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST,LOWER_UP> metric 0 mtu 1500
@@ -381,6 +406,7 @@ The epair (contrary to the vlan interface I used in the host) uses a normal mtu:
 I believe that I want to remain rather vanilla with the bhyve to begin with, but in a while I want to replicate the neat [zadm(1)](https://github.com/omniosorg/zadm/blob/master/doc/zadm.pod) workflow that I've come to appreciate a lot from [OmniOS](https://omnios.org/).
 
 Currently, I create a bhyve config stanza (and define either one of my pass through devices or a viona netlink), then fetch the cloud-init config from the cloud-init metadata service I now run in a jail:
+
 ```
     acpi_tables=false
     acpi_tables_in_memory=false
@@ -422,9 +448,10 @@ Currently, I create a bhyve config stanza (and define either one of my pass thro
     name=guestvm2
 ```
 
-Then I connect to the bhyve with the cu command, and exits with ```~~.``` (one escape ~ for each layer, and as I ssh to my host...) similar to how I exit out of a bhyve zone in illumos. What I don't really like, so far, is the current workflow and then the addressing of the console device.
+Then I connect to the bhyve with the cu command, and exits with `~~.` (one escape ~ for each layer, and as I ssh to my host...) similar to how I exit out of a bhyve zone in illumos. What I don't really like, so far, is the current workflow and then the addressing of the console device.
 
 In tmux I start the guest in one pane:
+
 ```
     bhyve -k guestvm2
     fbuf frame buffer base: 0xcfa36000000 [sz 33554432]
@@ -435,21 +462,23 @@ In tmux I start the guest in one pane:
 ```
 
 Then in another pane I connect to the console:
+
 ```
     #  cu -l /dev/nmdm1B
     Connected
-    
+
     e0c85107-61b6-48cc-96eb-54cae1fc1246 login: ~
     [EOT]
 ```
 
-That's (mostly) fine, but then I have to remember to ```bhyvectl --destroy --vm=guestvm2``` and then declaration of the console. I'll look into running bhyve in the jail instead, as that would (hopefully) give a static way of adressing the guest (perhaps jexec -u root <bhyveguest> cu -l /dev/ndm1B?), which I could create  a wrapper for.
+That's (mostly) fine, but then I have to remember to `bhyvectl --destroy --vm=guestvm2` and then declaration of the console. I'll look into running bhyve in the jail instead, as that would (hopefully) give a static way of adressing the guest (perhaps jexec -u root <bhyveguest> cu -l /dev/ndm1B?), which I could create a wrapper for.
 
 ## OpenZFS - rebased @Linux or @illumos?
 
 I'm not up to speed about the Linux rebased OpenZFS, but I would not chose those features to store my precious data as I saw something about dataloss in the Linux and FreeBSD encrypted datasets some year ago.
 
-What currently annoyed (with either jails or the dataset), is that after I stop a jail (with ```service jail stop thejail``` ), I get into this issue :
+What currently annoyed (with either jails or the dataset), is that after I stop a jail (with `service jail stop thejail` ), I get into this issue :
+
 ```
     # zfs destroy zroot/jails/containers/thejail
     cannot unmount '/jails/containers/thejail': pool or dataset is busy
@@ -459,6 +488,7 @@ What currently annoyed (with either jails or the dataset), is that after I stop 
 ```
 
 Besides that, the pool performance seem to be great. Better than I previously had in illumos (I believe that the sequencial rate is double):
+
 ```
     # pv noble-server-cloudimg-amd64.img.raw > /dev/zvol/zroot/bhyve/guestvm2/root
     3.50GiB 0:00:03 [1.14GiB/s] [========================================================================================================================================================>] 100%
@@ -471,6 +501,3 @@ What have I disovered so far? Will I abandon OmniOS (illumos) or FreeBSD? or eve
 ---
 
 I might do a video to recap what I discovered in some day (or perhaps two)...
-
-
-
